@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Rock, Paper, Scissors</title>
+
+        <style>
+            body {
+                text-align: center;
+                padding:20px;
+                margin: 40px;
+            }
+            h1 {
+                font-size: 128px;
+            }
+        </style>
+    </head>
+    <body>
+
+        <!-- User chooses r,p, or s Computer randomly selects r, p, or s Two choices are
+        compared and outcome is win, lose, or tie Outcome is tracked These choices and
+        outcomes are displayed in html -->
+
+        <div id="game">
+            <h1>Press R, S, or P to start playing!</h1>
+        </div>
+
+        <script>
+
+            var choices = ["R", "P", "S"];
+            var ties = 0;
+            var wins = 0;
+            var loses = 0;
+            var message = "";
+
+            document.onkeyup = function () {
+                var userChoice = String.fromCharCode(event.keyCode);
+                var computerChoice = choices[Math.floor(Math.random() * choices.length)];
+
+
+                if (userChoice == "R" || userChoice == "P" || userChoice == "S") {
+                    if (userChoice == computerChoice) {
+                        ties++;
+                        message = "TIE!";
+                    }
+                    if (userChoice == "R" && computerChoice == "P") {
+                        loses++;
+                        message = "<span style='color:red'>YOU LOSE</span>";
+                    }
+                    if (userChoice == "P" && computerChoice == "S") {
+                        loses++;
+                        message = "<span style='color:red'>YOU LOSE</span>";
+                    }
+                    if (userChoice == "S" && computerChoice == "R") {
+                        loses++;
+                        message = "<span style='color:red'>YOU LOSE</span>";
+                    }
+                    if (userChoice == "R" && computerChoice == "S") {
+                        wins++;
+                        message = "<span style='color:green'>YOU WIN</span>";
+                    }
+                    if (userChoice == "P" && computerChoice == "R") {
+                        wins++;
+                        message = "<span style='color:green'>YOU WIN</span>";
+                    }
+                    if (userChoice == "S" && computerChoice == "P") {
+                        wins++;
+                        message = "<span style='color:green'>YOU WIN</span>";
+                    }
+                } else {
+                    alert("Please type R, P, or S!")
+                }
+
+                html = ` <p><strong>Press R, P, or S to start playing!</strong></p><br>
+                         <p>Wins = ${wins}</p><br>
+                         <p>Loses = ${loses}</p><br>
+                         <p>Ties = ${ties}</p><br>
+                         <h1>${message}</h1>`;
+
+                document
+                    .querySelector("#game")
+                    .innerHTML = html;
+            }
+        </script>
+
+    </body>
+</html>
